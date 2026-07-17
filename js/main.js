@@ -668,8 +668,24 @@ function stripPhoneDigits(value) {
 
 function getSelectedCountryRule() {
   const dropdown = document.getElementById('dd-country');
-  const ruleKey = dropdown?.dataset.selectedRule || '';
-  if (!ruleKey || !PHONE_RULES[ruleKey]) return null;
+  if (!dropdown) return null;
+
+  // Prefer explicit selectedRule if present
+  let ruleKey = dropdown.dataset.selectedRule || '';
+
+  // If no ruleKey, try to infer it by matching the selected country name to PHONE_RULES labels
+  if (!ruleKey && dropdown.dataset.selectedCountry) {
+    const countryName = dropdown.dataset.selectedCountry;
+    for (const k in PHONE_RULES) {
+      if (PHONE_RULES[k] && PHONE_RULES[k].label === countryName) {
+        ruleKey = k;
+        break;
+      }
+    }
+  }
+
+  // Fallback to generic 'other' rule
+  if (!ruleKey || !PHONE_RULES[ruleKey]) ruleKey = 'other';
 
   return {
     key: ruleKey,
