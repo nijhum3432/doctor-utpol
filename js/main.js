@@ -379,7 +379,8 @@ function selectDd(id, value, icon, meta = {}) {
   const displayValue = id === 'dd-country'
     ? (value.match(/\(([^)]+)\)/)?.[1] || 'Intl')
     : value;
-  valueEl.textContent = `${icon} ${displayValue}`;
+  const displayText = icon ? `${icon} ${displayValue}` : displayValue;
+  valueEl.textContent = displayText;
   dropdown.classList.add('selected');
   dropdown.classList.remove('open');
   dropdown.setAttribute('aria-expanded', 'false');
@@ -425,10 +426,11 @@ function buildCountryDropdown() {
     opt.dataset.dropdownId = 'dd-country';
     opt.dataset.value = label;
     opt.dataset.country = country.name;
-    opt.dataset.icon = country.flag;
-    opt.dataset.rule = country.rule;
+    if (country.flag) opt.dataset.icon = country.flag;
+    if (country.rule) opt.dataset.rule = country.rule;
     opt.setAttribute('tabindex', '0');
-    opt.innerHTML = `<span class="cdd-opt-icon" aria-hidden="true">${country.flag}</span><span>${label}</span>`;
+    const iconHtml = country.flag ? `<span class="cdd-opt-icon" aria-hidden="true">${country.flag}</span>` : '';
+    opt.innerHTML = `${iconHtml}<span>${label}</span>`;
     return opt;
   }
 
@@ -489,8 +491,9 @@ document.querySelectorAll('[data-dropdown-trigger]').forEach(trigger => {
 });
 
 document.querySelectorAll('.cdd-opt[data-dropdown-id]').forEach(option => {
-  const { dropdownId, value, icon } = option.dataset;
-  if (!dropdownId || !value || !icon) return;
+  const { dropdownId, value } = option.dataset;
+  let icon = option.dataset.icon || '';
+  if (!dropdownId || !value) return;
 
   const selectOption = () => selectDd(dropdownId, value, icon, option.dataset);
 
