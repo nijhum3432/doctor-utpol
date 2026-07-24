@@ -20,7 +20,7 @@
     {
       label: 'Instagram',
       href: 'https://www.instagram.com/akramul_islam_utpol/',
-      svg: '<svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.01２-４．８４９－．０７－３．２６－．１４９－４．７７１－１．６９９－４．９１９－４．９２－．０５８－１．２６５－．０７－１．６４４－．０７－４．８４９ ０－３．２０４．０１３－３．５８３．０７－４．８４９．１４９－３．２２７ １．６６４－４．７７１ ４．９１９－４．９１９ １．２６６－．０５７ １．６４５－．０６９ ４．８４９－．０６９zM１２ ０C８．７４１ ０ ８．３３３．０１４ ７．０５３．０７２ ２．６９５．２７２／svg>',
+      svg: '<svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.01-4.85-.07-3.225-.149-4.771-1.664-4.919-4.919-.058-1.266-.07-1.644-.07-4.85 0-3.204.012-3.584.07-4.85.149-3.225 1.664-4.771 4.919-4.919 1.266-.058 1.644-.07 4.85-.07zm0 1.8c-3.18 0-3.558.012-4.806.069-2.079.096-3.037.937-3.134 3.134-.057 1.248-.069 1.626-.069 4.806 0 3.18.012 3.558.069 4.806.097 2.197 1.055 3.038 3.134 3.134 1.248.057 1.626.069 4.806.069s3.558-.012 4.806-.069c2.079-.096 3.037-.937 3.134-3.134.057-1.248.069-1.626.069-4.806 0-3.18-.012-3.558-.069-4.806-.097-2.197-1.055-3.038-3.134-3.134-1.248-.057-1.626-.069-4.806-.069zm0 4.5a5.25 5.25 0 1 1 0 10.5 5.25 5.25 0 0 1 0-10.5zm0 1.8a3.45 3.45 0 1 0 0 6.9 3.45 3.45 0 0 0 0-6.9zm5.1-.75a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/></svg>',
     },
     {
       label: 'TikTok',
@@ -51,11 +51,12 @@
 <footer class="site-footer">
   <nav class="footer-social" data-social-links="footer" aria-label="Social media links"></nav>
   <p class="footer-legal">
-    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="privacy-policy.html" data-i18n="footerPrivacy">Privacy Policy</a>
     <span class="footer-divider" aria-hidden="true">|</span>
-    <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+    <a href="terms-and-conditions.html" data-i18n="footerTerms">Terms &amp; Conditions</a>
   </p>
-  <p class="footer-copy">&copy; ${new Date().getFullYear()} <a href="index.html" class="footer-copy-link">Shehzadi Nizhum</a>. All Rights Reserved.</p>
+  <p class="footer-copy">&copy; ${new Date().getFullYear()} <a href="index.html" class="footer-copy-link" data-i18n="footerName">Dr. Akramul Islam Utpol</a>. <span data-i18n="footerCopyright">All Rights Reserved.</span></p>
+  <p class="footer-credit">Website Designed &amp; Developed by <span class="footer-credit-name">ShehZadi Nizhum</span></p>
 </footer>`.trim();
   }
 

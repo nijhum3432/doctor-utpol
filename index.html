@@ -271,42 +271,328 @@
     <!-- ══ STYLESHEET ══ -->
     <link rel="stylesheet" href="css/style.css" />
     <style>
-      .site-nav-static{position:fixed;top:0;left:0;width:100%;z-index:200;background:#000;border-bottom:2px solid #f5c518;color:#fff;padding:10px 20px}
-      .site-nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-      .site-logo{display:flex;align-items:center;gap:10px}
-      .site-logo-img{width:36px;height:36px;border-radius:6px;object-fit:cover}
-      .site-logo-text{font-weight:800;color:#fff;font-family:Inter,system-ui,Arial,Helvetica,sans-serif;margin-left:6px}
-      .site-links ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
-      .site-links a{color:#ddd;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:1px}
-      .site-links .btn-cta{background:#f5c518;color:#000;padding:6px 10px;border-radius:4px;font-weight:700}
-      .mobile-menu-btn{display:none;background:transparent;border:2px solid #f5c518;color:#f5c518;padding:6px 8px;border-radius:6px;font-weight:700}
-      @media (max-width:800px){
-        .mobile-menu-btn{display:inline-block}
-        .site-links{position:relative}
-        .site-links ul{display:none}
-        .site-links.open ul{display:block;position:absolute;right:12px;top:56px;min-width:180px;background:#000;padding:12px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.6);z-index:300}
-        .site-links.open ul li{margin:8px 0}
-        .site-links.open ul a{display:block}
+      .site-nav-static {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 200;
+        background: rgba(0, 0, 0, 0.95);
+        border-bottom: 1px solid rgba(255, 237, 84, 0.14);
+        color: #fff;
+        padding: 12px 18px;
       }
-      main{padding-top:72px}
+      .site-nav-inner {
+        max-width: 1320px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .site-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+      .site-logo-img {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+      .site-logo-text {
+        font-weight: 800;
+        color: #fff;
+        font-family: Inter, system-ui, Arial, Helvetica, sans-serif;
+        margin-left: 6px;
+        font-size: clamp(15px, 3.2vw, 20px);
+        white-space: nowrap;
+      }
+      .site-links {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .site-links ul {
+        display: flex;
+        gap: 18px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+      }
+      .site-links a {
+        color: #ddd;
+        text-decoration: none;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .site-links .btn-cta {
+        background: #f5c518;
+        color: #000;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+      .mobile-menu-btn {
+        display: none;
+        background: transparent;
+        border: 2px solid #f5c518;
+        color: #f5c518;
+        padding: 8px 10px;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+      .site-links ul li {
+        min-width: 0;
+      }
+      @media (max-width: 800px) {
+        .mobile-menu-btn {
+          display: inline-flex;
+        }
+        .site-links ul {
+          display: none;
+          position: absolute;
+          top: 100%;
+          right: 16px;
+          width: min(280px, 80vw);
+          background: rgba(0, 0, 0, 0.98);
+          padding: 14px;
+          border-radius: 18px;
+          box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+        }
+        .site-links.open ul {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .site-links.open ul li {
+          margin: 0;
+        }
+        .site-links.open ul a {
+          display: block;
+          padding: 10px 8px;
+          border-radius: 12px;
+          transition: background .2s;
+        }
+        .site-links.open ul a:hover {
+          background: rgba(255, 237, 84, 0.12);
+        }
+      }
+      main {
+        padding-top: 80px;
+      }
 
-      /* Responsive hero and layout */
-      .hero-grid{display:flex;align-items:center;justify-content:space-between;gap:40px}
-      .hero-left{max-width:520px}
-      .hero-photo-wrap img{width:100%;height:auto;border-radius:24px}
-      @media (max-width:900px){
-        .hero-grid{flex-direction:column-reverse;padding:20px 18px}
-        .hero-left{text-align:center}
-        .hero-name{font-size:28px}
-        .hero-sub{font-size:14px}
-        .hero-photo-wrap{width:260px;margin:0 auto}
+      .hero-grid {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
       }
-      @media (max-width:480px){
-        .hero-photo-wrap{width:200px}
-        .site-logo-text{font-size:13px}
-        .site-links .btn-cta{padding:6px 8px;font-size:12px}
-        .hero-name{font-size:22px}
-        .hero-sub{font-size:13px}
+      .hero-left {
+        max-width: 520px;
+      }
+      .hero-photo-wrap img {
+        width: 100%;
+        height: auto;
+        border-radius: 24px;
+      }
+      .hero-trust {
+        gap: 12px;
+      }
+      @media (max-width: 900px) {
+        .hero-grid {
+          flex-direction: column-reverse;
+          padding: 0 18px 20px;
+          gap: 24px;
+        }
+        .hero-left {
+          max-width: 100%;
+          width: 100%;
+          text-align: center;
+          align-items: center;
+        }
+        .hero-name {
+          font-size: clamp(32px, 9vw, 44px);
+          line-height: 1.05;
+        }
+        .hero-sub {
+          font-size: 15px;
+          line-height: 1.75;
+          margin: 12px auto 20px;
+          max-width: 650px;
+        }
+        .hero-photo-wrap {
+          width: min(84vw, 300px);
+          aspect-ratio: 3 / 4;
+          margin: 0 auto;
+        }
+        .hero-cta {
+          width: 100%;
+          justify-content: center;
+          padding: 14px 18px;
+        }
+        .hero-trust {
+          justify-content: center;
+          flex-wrap: wrap;
+          margin: 0 auto;
+          max-width: 100%;
+        }
+        .hero-social-right {
+          justify-content: center;
+          gap: 10px;
+          margin-top: 14px;
+        }
+      }
+      @media (max-width: 768px) {
+        .site-nav-static {
+          padding: 10px 14px;
+        }
+        .site-nav-inner {
+          gap: 10px;
+        }
+        .site-links {
+          width: 100%;
+          justify-content: flex-end;
+        }
+        .site-logo-text {
+          font-size: clamp(16px, 4.5vw, 18px);
+        }
+        main {
+          padding-top: 84px;
+        }
+      }
+      @media (max-width: 640px) {
+        .section-title {
+          font-size: clamp(24px, 8vw, 32px);
+          line-height: 1.1;
+        }
+        .service-cards {
+          display: grid;
+          gap: 16px;
+        }
+        .scard,
+        .stcard,
+        .faq-item,
+        .ctr-card,
+        .cf-group {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        .scard-title {
+          font-size: 16px;
+        }
+        .scard-desc,
+        .stcard-desc,
+        .faq-a p {
+          font-size: 13px;
+        }
+        .contact-inner-grid {
+          gap: 24px;
+        }
+        .cf-phone-row {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .cf-submit,
+        .cf-action-btn {
+          width: 100%;
+        }
+        .footer-legal {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero-photo-wrap {
+          width: min(72vw, 260px);
+        }
+        .hero-chamber-card {
+          padding: 16px;
+        }
+        .site-logo-img {
+          width: 34px;
+          height: 34px;
+        }
+        .site-links .btn-cta {
+          display: none;
+        }
+        .hero-name {
+          font-size: clamp(26px, 10vw, 36px);
+        }
+        .hero-sub {
+          font-size: 13px;
+        }
+        .hero-cta {
+          width: 100%;
+          justify-content: center;
+          padding: 14px 16px;
+        }
+        .hero-trust {
+          border-radius: 18px;
+          padding: 10px 12px;
+        }
+        .scard-btn {
+          width: 100%;
+          text-align: center;
+          justify-content: center;
+        }
+      }
+      @media (max-width: 420px) {
+        .hero-grid {
+          flex-wrap: wrap;
+          gap: 22px;
+        }
+        .hero-left {
+          width: 100%;
+          max-width: 100%;
+          align-items: center;
+          text-align: center;
+        }
+        .hero-photo-wrap {
+          width: min(84vw, 260px);
+          aspect-ratio: 3 / 4;
+          margin: 0 auto;
+        }
+        .hero-chamber-card {
+          padding: 14px 16px;
+        }
+        .hero-chamber-card p {
+          font-size: 13px;
+        }
+        .hero-social-right {
+          gap: 8px;
+        }
+        .hero-social-right .hs-link {
+          min-width: 36px;
+          width: auto;
+          height: auto;
+          max-width: 42px;
+          aspect-ratio: 1 / 1;
+        }
+        .service-cards {
+          display: grid;
+          gap: 16px;
+        }
+        .work-thumb {
+          width: min(60vw, 220px);
+        }
+        .faq-a {
+          padding: 0 18px 0 54px;
+        }
+        .contact-inner-grid {
+          gap: 24px;
+        }
+        .cf-actions {
+          gap: 10px;
+          flex-direction: column;
+        }
       }
     </style>
   </head>
@@ -319,6 +605,22 @@
         src="https://www.facebook.com/tr?id=988902764094559&ev=PageView&noscript=1"
       />
     </noscript>
+    <div class="lang-modal-backdrop" id="langModal" role="dialog" aria-modal="true" aria-labelledby="langModalTitle" aria-describedby="langModalDesc">
+      <div class="lang-modal">
+        <div class="lang-modal-badge" aria-hidden="true">🌍</div>
+        <h2 id="langModalTitle" data-i18n="langModalTitle">আপনার ভাষা নির্বাচন করুন</h2>
+        <div class="lang-options" role="group" aria-label="Language selection">
+          <button class="lang-option" type="button" data-lang="en">
+            <span class="lang-flag" aria-hidden="true">🇺🇸</span>
+            <span class="lang-label">English</span>
+          </button>
+          <button class="lang-option" type="button" data-lang="bn">
+            <span class="lang-flag" aria-hidden="true">🇧🇩</span>
+            <span class="lang-label">বাংলা</span>
+          </button>
+        </div>
+      </div>
+    </div>
     <div id="stars"></div>
 
     <!-- Static header replacing custom site-nav to reflect doctor branding -->
@@ -329,14 +631,18 @@
           <span class="site-logo-text">Dr. Akramul Islam Utpol</span>
         </div>
         <nav class="site-links" aria-label="Primary">
+          <div class="lang-switcher" aria-label="Language switcher">
+            <button class="lang-switch-btn is-active" type="button" data-lang-switch="en">EN</button>
+            <button class="lang-switch-btn" type="button" data-lang-switch="bn">BN</button>
+          </div>
           <button class="mobile-menu-btn" id="mobileMenuBtn" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
           <ul id="mobileMenu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#stages">Care Journey</a></li>
-            <li><a href="#work">Practice</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact" class="btn-cta">Book</a></li>
+            <li><a href="#home" data-i18n="navHome">Home</a></li>
+            <li><a href="#services" data-i18n="navServices">Services</a></li>
+            <li><a href="#stages" data-i18n="navJourney">Care Journey</a></li>
+            <li><a href="#work" data-i18n="navPractice">Practice</a></li>
+            <li><a href="#faq" data-i18n="navFaq">FAQ</a></li>
+            <li><a href="#contact" class="btn-cta" data-i18n="navBook">Book</a></li>
           </ul>
         </nav>
       </div>
@@ -348,13 +654,39 @@
           <!-- LEFT -->
           <div class="hero-left">
             <h1 class="hero-name">
-              Hi, I&rsquo;m <span class="accent">Dr. Akramul Islam Utpol</span>
+              <span data-i18n="heroTitlePrefix">Hi, I&rsquo;m</span> <span class="accent">Dr. Akramul Islam Utpol</span>
             </h1>
-            <p class="hero-sub">
-              a compassionate doctor dedicated to helping patients and families receive trusted medical care with comfort, clarity, and professionalism.
+            <p class="hero-sub" data-i18n="heroSub">
+              Hello, I&rsquo;m Dr. Akramul Islam Utpol. My commitment is to provide safe, compassionate, and high-quality medical care for every child and family through accurate diagnosis, clear guidance, and dedicated treatment.
             </p>
+            <div class="hero-chamber-card" aria-label="Chamber information">
+              <h3 data-i18n="chamberInfoTitle">🏥 Chamber Information</h3>
+              <div class="chamber-block">
+                <p><strong data-i18n="chamberSectionTitle">🏥 Chamber</strong></p>
+                <p data-i18n="chamberName">Al-Araf Medical Center</p>
+                <p>
+                  <strong data-i18n="chamberAddressLabel">📍 Address</strong><br />
+                  <span data-i18n="chamberAddressLine1">Beside the Santahar Microcar Stand,</span><br />
+                  <span data-i18n="chamberAddressLine2">Next to Dental Care,</span><br />
+                  <span data-i18n="chamberAddressLine3">Santahar Pourashava, Bogura, Bangladesh</span><br />
+                </p>
+                <p>
+                  <strong data-i18n="chamberVisitingHoursLabel">🕒 Visiting Hours</strong><br />
+                  <span data-i18n="chamberVisitingHoursLine1">Saturday – Thursday</span><br />
+                  <span data-i18n="chamberVisitingHoursLine2">8:00 AM – 9:00 PM</span>
+                </p>
+                <p>
+                  <strong data-i18n="chamberAppointmentLabel">📞 Appointment</strong><br />
+                  +880 1311-928892
+                </p>
+                <p>
+                  <strong data-i18n="chamberMapLabel">🗺️ Google Maps</strong><br />
+                  <a href="https://www.google.com/maps?q=24.807725292321777,88.98716357443624" target="_blank" rel="noopener noreferrer" data-i18n="chamberMapLinkLabel">View Location</a>
+                </p>
+              </div>
+            </div>
             <a href="#contact" class="hero-cta">
-              <span class="cta-arr">»</span> Book Appointment
+              <span class="cta-arr"></span> <span data-i18n="heroCta">📞 Contact Now</span>
             </a>
             <div class="hero-trust">
               <div class="ht-avatars">
@@ -364,7 +696,7 @@
                 <img src="assets/client-4.webp" alt="Patient" class="ht-av" width="30" height="30">
                 <img src="assets/client-5.webp" alt="Patient" class="ht-av" width="30" height="30">
               </div>
-              <span class="ht-text">Trusted by <strong id="trustCounter">1000+</strong> patients and families</span>
+              <span class="ht-text"><span data-i18n="heroTrustPrefix">Trusted by</span> <strong id="trustCounter">25973</strong> <span data-i18n="heroTrustSuffix">patients and families</span></span>
             </div>
           </div>
           <!-- end hero-left -->
@@ -441,19 +773,20 @@
       <section aria-labelledby="why-title">
         <div class="why-inner">
           <div>
-            <div class="tag-pill">Why patients choose me?</div>
+            <div class="tag-pill" data-i18n="whyTag">Why Patients Choose Me</div>
             <h2 class="section-title" id="why-title">
-              Care That Feels<br /><span class="yl">Personal and Trustworthy</span>
+              <span data-i18n="whyTitleLine1">Compassionate Care</span><br /><span class="yl" data-i18n="whyTitleLine2">You Can Trust</span>
             </h2>
-            <p class="section-desc">
-              Good healthcare is about more than treatment. It is about listening, explaining clearly, and helping each patient feel calm, informed, and supported through every step of care.
+            <p class="section-desc" data-i18n="whyDesc">
+              Quality healthcare is about more than treating illness—it’s about listening, understanding, and providing the right care with compassion. My goal is to ensure every patient feels informed, comfortable, and confident throughout their healthcare journey.
             </p>
             <ul class="why-list" aria-label="Key strengths">
-              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> Compassionate, patient-first consultation</li>
-              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> Clear guidance for diagnosis and treatment</li>
-              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> Preventive care for lasting wellness</li>
-              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> Follow-up support for ongoing health needs</li>
-              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> Respectful care for individuals and families</li>
+              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> <span data-i18n="whyItem1">Compassionate, patient-centered care</span></li>
+              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> <span data-i18n="whyItem2">Accurate diagnosis and personalized treatment</span></li>
+              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> <span data-i18n="whyItem3">Clear communication and medical guidance</span></li>
+              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> <span data-i18n="whyItem4">Modern, evidence-based healthcare</span></li>
+              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> <span data-i18n="whyItem5">Ongoing support and follow-up care</span></li>
+              <li class="why-item"><span class="why-chevron" aria-hidden="true">›</span> <span data-i18n="whyItem6">Respectful care for individuals and families</span></li>
             </ul>
           </div>
           <div>
@@ -472,46 +805,46 @@
 
       <!-- ═══ SERVICES ═══ -->
       <section class="services-section" id="services" aria-labelledby="services-title">
-        <h2 class="section-title" id="services-title">My Services</h2>
+        <h2 class="section-title" id="services-title" data-i18n="servicesTitle">My Services</h2>
         <div class="service-cards">
           <article class="scard">
-            <div class="scard-top"><span class="scard-tag">Primary Care</span></div>
-            <h3 class="scard-title">General Consultation</h3>
-            <p class="scard-desc">
-              Personalized consultations for everyday health concerns, wellness planning, and medical guidance.
+            <div class="scard-top"><span class="scard-tag" data-i18n="servicePrimaryCare">General Consultation</span></div>
+            <h3 class="scard-title" data-i18n="serviceGeneralConsultation">General Consultation</h3>
+            <p class="scard-desc" data-i18n="serviceGeneralDesc">
+              Personalized medical consultation for common health concerns, wellness guidance, and treatment recommendations.
             </p>
             <div class="scard-footer">
-              <a href="#contact" class="scard-btn">Book Visit →</a>
+              <a href="#contact" class="scard-btn" data-i18n="serviceBookVisit">📞 Contact Now</a>
             </div>
           </article>
           <article class="scard">
-            <div class="scard-top"><span class="scard-tag">Prevention</span></div>
-            <h3 class="scard-title">Preventive Care</h3>
-            <p class="scard-desc">
-              Routine checkups, screenings, and health education to help prevent illness before it starts.
+            <div class="scard-top"><span class="scard-tag" data-i18n="servicePrevention">Preventive Healthcare</span></div>
+            <h3 class="scard-title" data-i18n="servicePreventiveCare">Preventive Healthcare</h3>
+            <p class="scard-desc" data-i18n="servicePreventiveDesc">
+              Stay healthy with regular check-ups, health screenings, and preventive care designed to detect problems early.
             </p>
             <div class="scard-footer">
-              <a href="#contact" class="scard-btn">Book Visit →</a>
+              <a href="#contact" class="scard-btn" data-i18n="serviceBookVisit">📞 Contact Now</a>
             </div>
           </article>
           <article class="scard">
-            <div class="scard-top"><span class="scard-tag">Long-term Support</span></div>
-            <h3 class="scard-title">Chronic Disease Care</h3>
-            <p class="scard-desc">
-              Ongoing support for long-term conditions with monitoring, medication review, and treatment planning.
+            <div class="scard-top"><span class="scard-tag" data-i18n="serviceLongTermSupport">Chronic Disease Management</span></div>
+            <h3 class="scard-title" data-i18n="serviceChronicCare">Chronic Disease Management</h3>
+            <p class="scard-desc" data-i18n="serviceChronicDesc">
+              Comprehensive care, treatment planning, medication review, and regular follow-up for long-term health conditions.
             </p>
             <div class="scard-footer">
-              <a href="#contact" class="scard-btn">Book Visit →</a>
+              <a href="#contact" class="scard-btn" data-i18n="serviceBookVisit">📞 Contact Now</a>
             </div>
           </article>
           <article class="scard">
-            <div class="scard-top"><span class="scard-tag">Family Care</span></div>
-            <h3 class="scard-title">Family Health Support</h3>
-            <p class="scard-desc">
-              Compassionate care that supports families with guidance, reassurance, and dependable health support.
+            <div class="scard-top"><span class="scard-tag" data-i18n="serviceFamilyCare">Family Healthcare</span></div>
+            <h3 class="scard-title" data-i18n="serviceFamilySupport">Family Healthcare</h3>
+            <p class="scard-desc" data-i18n="serviceFamilyDesc">
+              Compassionate and personalized healthcare services for individuals and families of all ages.
             </p>
             <div class="scard-footer">
-              <a href="#contact" class="scard-btn">Book Visit →</a>
+              <a href="#contact" class="scard-btn" data-i18n="serviceBookVisit">📞 Contact Now</a>
             </div>
           </article>
         </div>
@@ -530,32 +863,33 @@
           </defs>
           <path class="stages-wave-path" id="swp" d="M0,10 Q20,3 40,10 Q60,17 80,10 Q100,3 120,10 Q140,17 160,10" />
         </svg>
-        <h2 class="sr-only" id="stages-title">My Care Process</h2>
+        <h2 class="sr-only" id="stages-title">Care Journey</h2>
+        <p class="section-desc" data-i18n="stagesIntro">A Simple and Patient-Focused Care Process</p>
         <div class="stage-cards">
           <div class="stcard">
-            <div class="stcard-num">Step 01</div>
-            <h3 class="stcard-name">Consultation</h3>
-            <p class="stcard-desc">I listen carefully to your <span class="hl">concerns</span>, your <span class="hl">history</span>, and your <span class="hl">goals</span> for care before anything else.</p>
+            <div class="stcard-num" data-i18n="step01Label">Step 01</div>
+            <h3 class="stcard-name" data-i18n="step01Title">Consultation</h3>
+            <p class="stcard-desc" data-i18n="step01Desc">Every visit begins by listening carefully to your concerns, understanding your medical history, and discussing your healthcare goals.</p>
           </div>
           <div class="stcard">
-            <div class="stcard-num">Step 02</div>
-            <h3 class="stcard-name">Assessment</h3>
-            <p class="stcard-desc">A clear <span class="hl">evaluation</span> is made to understand symptoms, risks, and the best way forward.</p>
+            <div class="stcard-num" data-i18n="step02Label">Step 02</div>
+            <h3 class="stcard-name" data-i18n="step02Title">Assessment</h3>
+            <p class="stcard-desc" data-i18n="step02Desc">A thorough evaluation is performed to identify your condition, assess potential risks, and determine the most appropriate course of care.</p>
           </div>
           <div class="stcard">
-            <div class="stcard-num">Step 03</div>
-            <h3 class="stcard-name">Treatment Plan</h3>
-            <p class="stcard-desc">A practical <span class="hl">care plan</span> is created with medication guidance, lifestyle support, and next steps.</p>
+            <div class="stcard-num" data-i18n="step03Label">Step 03</div>
+            <h3 class="stcard-name" data-i18n="step03Title">Personalized Treatment Plan</h3>
+            <p class="stcard-desc" data-i18n="step03Desc">A tailored treatment plan is developed, including medication guidance, lifestyle recommendations, and clear next steps for your recovery.</p>
           </div>
           <div class="stcard">
-            <div class="stcard-num">Step 04</div>
-            <h3 class="stcard-name">Follow-Up</h3>
-            <p class="stcard-desc">Ongoing <span class="hl">follow-up</span> helps monitor progress, adjust care, and make sure your recovery stays on track.</p>
+            <div class="stcard-num" data-i18n="step04Label">Step 04</div>
+            <h3 class="stcard-name" data-i18n="step04Title">Follow-Up Care</h3>
+            <p class="stcard-desc" data-i18n="step04Desc">Your progress is monitored through regular follow-up appointments, allowing adjustments to your treatment whenever necessary.</p>
           </div>
           <div class="stcard">
-            <div class="stcard-num">Step 05</div>
-            <h3 class="stcard-name">Long-Term Support</h3>
-            <p class="stcard-desc">Trusted <span class="hl">support</span> continues beyond the appointment so patients feel confident and cared for.</p>
+            <div class="stcard-num" data-i18n="step05Label">Step 05</div>
+            <h3 class="stcard-name" data-i18n="step05Title">Ongoing Support</h3>
+            <p class="stcard-desc" data-i18n="step05Desc">Our commitment continues beyond your appointment, providing ongoing guidance and support to help you maintain better health with confidence.</p>
           </div>
         </div>
       </section>
@@ -563,8 +897,8 @@
       <!-- ═══ WORK MARQUEE ═══ -->
       <section id="work" class="work-section" aria-labelledby="work-title">
         <div class="work-head">
-          <div class="tag-pill">My Practice</div>
-          <h2 class="section-title" id="work-title">Care Areas <span class="yl">We Support</span></h2>
+          <div class="tag-pill" data-i18n="practiceTag">My Practice</div>
+          <h2 class="section-title" id="work-title"><span data-i18n="practiceTitleLine1">Care Areas</span> <span class="yl" data-i18n="practiceTitleLine2">We Support</span></h2>
         </div>
 
         <div class="work-marquee" id="marqueeTrack" aria-label="Medical care areas" aria-busy="true"></div>
@@ -605,19 +939,19 @@
       <!-- ═══ RETENTION COMPARISON ═══ -->
       <section class="ctr-section" aria-labelledby="results-title">
         <div class="results-head">
-          <div class="tag-pill">Patient Experience</div>
-          <h2 class="section-title" id="results-title">Before &amp; After<br /><span class="yl">Receiving Care</span></h2>
+          <div class="tag-pill" data-i18n="resultsTag">Patient Experience</div>
+          <h2 class="section-title" id="results-title"><span data-i18n="resultsTitleLine1">Before &amp; After</span><br /><span class="yl" data-i18n="resultsTitleLine2">Receiving Care</span></h2>
         </div>
 
         <div class="ctr-inner">
           <div class="ctr-row">
             <div class="ctr-head">
               <div class="ctr-bar ctr-bar-red"></div>
-              <span class="ctr-head-text">Before visiting us</span>
+              <span class="ctr-head-text" data-i18n="beforeCareLabel">Before visiting us</span>
             </div>
             <div class="ctr-card">
               <div class="ctr-pct ctr-pct-red">42%</div>
-              <div class="ctr-chart-lbl">Unclear guidance and delayed care</div>
+              <div class="ctr-chart-lbl" data-i18n="beforeCareValue">Unclear guidance and delayed care</div>
               <div class="ctr-chart">
                 <svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true">
                   <defs>
@@ -636,11 +970,11 @@
           <div class="ctr-row">
             <div class="ctr-head">
               <div class="ctr-bar ctr-bar-green"></div>
-              <span class="ctr-head-text">After receiving care</span>
+              <span class="ctr-head-text" data-i18n="afterCareLabel">After receiving care</span>
             </div>
             <div class="ctr-card">
               <div class="ctr-pct ctr-pct-green">88%</div>
-              <div class="ctr-chart-lbl">Clear treatment plan and better follow-up</div>
+              <div class="ctr-chart-lbl" data-i18n="afterCareValue">Clear treatment plan and better follow-up</div>
               <div class="ctr-chart">
                 <svg viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true">
                   <defs>
@@ -660,61 +994,72 @@
 
       <!-- ═══ FAQ ═══ -->
       <section id="faq" aria-labelledby="faq-title">
-        <div class="tag-pill">FAQs</div>
-        <h2 class="section-title" id="faq-title">Frequently Asked<br /><span class="yl">Questions</span></h2>
+        <div class="tag-pill" data-i18n="faqTag">FAQs</div>
+        <h2 class="section-title" id="faq-title"><span data-i18n="faqTitleLine1">Frequently Asked</span><br /><span class="yl" data-i18n="faqTitleLine2">Questions</span></h2>
 
         <div class="faq-item">
           <button class="faq-q" id="faq-q-1" type="button" aria-expanded="false" aria-controls="faq-a-1">
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20h4l9-9-4-4-9 9v4z"/><path d="M14.5 6.5l3 3"/></svg></span>
-            <span class="faq-q-text">How do I book an appointment?</span>
+            <span class="faq-q-text" data-i18n="faqQ1">How can I book an appointment?</span>
             <span class="faq-chevron" aria-hidden="true"></span>
           </button>
           <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1" aria-hidden="true">
-            <p>You can book a visit by filling out the contact form below or reaching out directly through the clinic contact details provided.</p>
+            <p data-i18n="faqA1">You can book an appointment by calling us, sending a WhatsApp message, or using the online appointment form on this website.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" id="faq-q-2" type="button" aria-expanded="false" aria-controls="faq-a-2">
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
-            <span class="faq-q-text">Do you provide follow-up care?</span>
+            <span class="faq-q-text" data-i18n="faqQ2">What are your visiting hours?</span>
             <span class="faq-chevron" aria-hidden="true"></span>
           </button>
           <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2" aria-hidden="true">
-            <p>Yes. Ongoing follow-up care is an important part of ensuring your health needs are monitored and managed properly.</p>
+            <p data-i18n="faqA2">The chamber is open Saturday to Thursday, from 8:00 AM to 9:00 PM. Please contact us before visiting in case of schedule changes.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" id="faq-q-3" type="button" aria-expanded="false" aria-controls="faq-a-3">
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 8h16"/><path d="M4 16h16"/><path d="M8 5v6"/><path d="M16 13v6"/></svg></span>
-            <span class="faq-q-text">Is the clinic suitable for families?</span>
+            <span class="faq-q-text" data-i18n="faqQ3">Where is your chamber located?</span>
             <span class="faq-chevron" aria-hidden="true"></span>
           </button>
           <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3" aria-hidden="true">
-            <p>Absolutely. The clinic welcomes individuals and families looking for dependable, compassionate medical support.</p>
+            <p data-i18n="faqA3">Our chamber is located beside the Santahar Microcar Stand, next to Dental Care, Santahar Pourashava, Bogura, Bangladesh.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" id="faq-q-4" type="button" aria-expanded="false" aria-controls="faq-a-4">
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg></span>
-            <span class="faq-q-text">What types of care are available?</span>
+            <span class="faq-q-text" data-i18n="faqQ4">Do I need to bring previous medical reports?</span>
             <span class="faq-chevron" aria-hidden="true"></span>
           </button>
           <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4" aria-hidden="true">
-            <p>General consultations, preventive care, chronic disease support, family health support, and follow-up care are available.</p>
+            <p data-i18n="faqA4">Yes. If you have previous prescriptions, test reports, or medical records, please bring them to help us provide the best possible care.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q" id="faq-q-5" type="button" aria-expanded="false" aria-controls="faq-a-5">
             <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
-            <span class="faq-q-text">How soon can I get help?</span>
+            <span class="faq-q-text" data-i18n="faqQ5">Do you provide follow-up consultations?</span>
             <span class="faq-chevron" aria-hidden="true"></span>
           </button>
           <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5" aria-hidden="true">
-            <p>Appointments are arranged based on availability and your health needs, with a priority on prompt and compassionate care.</p>
+            <p data-i18n="faqA5">Yes. Follow-up consultations are available to monitor your recovery, review your progress, and adjust treatment if necessary.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" id="faq-q-6" type="button" aria-expanded="false" aria-controls="faq-a-6">
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 20h4l9-9-4-4-9 9v4z"/><path d="M14.5 6.5l3 3"/></svg></span>
+            <span class="faq-q-text" data-i18n="faqQ6">Can I contact the doctor for emergencies?</span>
+            <span class="faq-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a" id="faq-a-6" role="region" aria-labelledby="faq-q-6" aria-hidden="true">
+            <p data-i18n="faqA6">For medical emergencies, please visit the nearest emergency department immediately. For appointment-related inquiries, you can contact us during chamber hours.</p>
           </div>
         </div>
       </section>
@@ -723,23 +1068,18 @@
       <section id="contact" class="contact-section" aria-labelledby="contact-title">
         <div class="contact-inner-grid">
           <div class="contact-left">
-            <div class="tag-pill contact-tag">Let's Talk Care</div>
-            <h2 class="section-title" id="contact-title">Book Your Visit<br />With <span class="yl">Trusted Medical Support</span></h2>
+            <div class="tag-pill contact-tag" data-i18n="contactTag">Let's Talk Care</div>
+            <h2 class="section-title" id="contact-title"><span data-i18n="contactTitleLine1">Book Your Visit</span><br /><span data-i18n="contactTitleLine2">With</span> <span class="yl" data-i18n="contactTitleLine3">Trusted Medical Support</span></h2>
           </div>
 
           <form class="cf-form-wrap" id="contact-form" onsubmit="return false;">
             <div class="cf-group">
-              <label class="cf-label" for="cf-name">YOUR NAME <span class="cf-required">*</span></label>
+              <label class="cf-label" for="cf-name"><span data-i18n="contactNameLabel">YOUR NAME *</span></label>
               <input type="text" id="cf-name" class="cf-input" placeholder="Enter your full name" autocomplete="name" aria-describedby="cf-name-err" aria-required="true" required />
               <span class="cf-error" id="cf-name-err">Your name is required.</span>
             </div>
-            <div class="cf-group">
-              <label class="cf-label" for="cf-email">EMAIL <span class="cf-required">*</span></label>
-              <input type="email" id="cf-email" class="cf-input" placeholder="you@example.com" autocomplete="email" inputmode="email" aria-describedby="cf-email-err" aria-required="true" required />
-              <span class="cf-error" id="cf-email-err">Please enter a valid email address.</span>
-            </div>
             <div class="cf-group cf-phone-group">
-              <div class="cf-label" id="cf-whatsapp-label">PHONE NUMBER <span class="cf-required">*</span></div>
+              <div class="cf-label" id="cf-whatsapp-label"><span data-i18n="contactPhoneLabel">PHONE NUMBER *</span></div>
               <span class="sr-only" id="dd-country-label">WhatsApp country code</span>
               <div class="cf-phone-row">
                 <div class="cdd cf-phone-country" id="dd-country" role="combobox" aria-labelledby="cf-whatsapp-label dd-country-label" aria-expanded="false">
@@ -749,61 +1089,34 @@
                   </div>
                   <div class="cdd-menu" id="dd-country-menu" role="listbox"></div>
                 </div>
-                <input type="tel" id="cf-whatsapp" class="cf-input cf-phone-input" placeholder="+1 234 567 8900" autocomplete="tel" inputmode="tel" aria-describedby="cf-whatsapp-help cf-whatsapp-err" aria-required="true" required />
+                <input type="tel" id="cf-whatsapp" class="cf-input cf-phone-input" placeholder="+880 ** *** ****" autocomplete="tel" inputmode="tel" aria-describedby="cf-whatsapp-help cf-whatsapp-err" aria-required="true" required />
               </div>
               <span class="cf-help" id="cf-whatsapp-help"></span>
               <span class="cf-error" id="dd-country-err">Please select your country first.</span>
               <span class="cf-error" id="cf-whatsapp-err">Please enter a valid WhatsApp number for the selected country.</span>
             </div>
             <div class="cf-group">
-              <div class="cf-label" id="dd1-label">SERVICE NEEDED</div>
-              <div class="cdd" id="dd1" role="combobox" aria-labelledby="dd1-label" aria-expanded="false">
-                <div class="cdd-trigger" data-dropdown-trigger="dd1" role="button" aria-haspopup="listbox" aria-controls="dd1-menu" tabindex="0">
-                  <span class="cdd-val" id="dd1-val">Select a service...</span>
-                  <span class="cdd-arrow" id="dd1-arrow" aria-hidden="true">▼</span>
-                </div>
-                <div class="cdd-menu" id="dd1-menu" role="listbox">
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd1" data-value="General Consultation" data-icon="🩺" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">🩺</span><span>General Consultation</span></div>
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd1" data-value="Preventive Care" data-icon="🧪" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">🧪</span><span>Preventive Care</span></div>
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd1" data-value="Chronic Disease Care" data-icon="💙" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">💙</span><span>Chronic Disease Care</span></div>
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd1" data-value="Family Health Support" data-icon="👨‍👩‍👧‍👦" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">👨‍👩‍👧‍👦</span><span>Family Health Support</span></div>
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd1" data-value="Vaccination &amp; Immunization" data-icon="💉" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">💉</span><span>Vaccination &amp; Immunization</span></div>
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd1" data-value="Other" data-icon="💬" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">💬</span><span>Other</span></div>
-                </div>
-              </div>
-              <span class="cf-error" id="dd1-err">Please select a project type.</span>
-            </div>
-            <div class="cf-group">
-              <div class="cf-label" id="dd2-label">VISIT PREFERENCE</div>
-              <div class="cdd" id="dd2" role="combobox" aria-labelledby="dd2-label" aria-expanded="false">
-                <div class="cdd-trigger" data-dropdown-trigger="dd2" role="button" aria-haspopup="listbox" aria-controls="dd2-menu" tabindex="0">
-                  <span class="cdd-val" id="dd2-val">Select preference...</span>
-                  <span class="cdd-arrow" id="dd2-arrow" aria-hidden="true">▼</span>
-                </div>
-                <div class="cdd-menu" id="dd2-menu" role="listbox">
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd2" data-value="Same Day Visit" data-icon="⚡" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">⚡</span><span>Same Day Visit</span></div>
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd2" data-value="Routine Checkup" data-icon="🗓️" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">🗓️</span><span>Routine Checkup</span></div>
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd2" data-value="Follow-Up Appointment" data-icon="🔁" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">🔁</span><span>Follow-Up Appointment</span></div>
-                  <div class="cdd-opt" role="option" data-dropdown-id="dd2" data-value="Consultation" data-icon="💬" tabindex="0"><span class="cdd-opt-icon" aria-hidden="true">💬</span><span>Consultation</span></div>
-                </div>
-              </div>
-              <span class="cf-error" id="dd2-err">Please select a visit preference.</span>
-            </div>
-            <div class="cf-group">
-              <label class="cf-label" for="cf-message">TELL ME ABOUT YOUR HEALTH CONCERN</label>
+              <label class="cf-label" for="cf-message" data-i18n="contactMessageLabel">TELL ME ABOUT YOUR HEALTH CONCERN</label>
               <textarea id="cf-message" class="cf-input cf-textarea" placeholder="Describe your concern, preferred appointment time, or questions you would like answered..." aria-describedby="cf-message-err" aria-required="true" required></textarea>
               <span class="cf-error" id="cf-message-err">Please describe your concern.</span>
             </div>
-            <button class="cf-submit" id="contactSubmit" type="button" aria-label="Send message">
-              <span class="cta-arr">»</span> Send Request
-            </button>
+            <div class="cf-actions">
+              <button class="cf-action-btn cf-action-btn--primary" id="whatsappAction" type="button" aria-label="Book via WhatsApp">
+                <span class="cf-action-icon" aria-hidden="true">💬</span>
+                <span data-i18n="whatsappActionLabel">Book via WhatsApp</span>
+              </button>
+              <button class="cf-action-btn cf-action-btn--secondary" id="callAction" type="button" aria-label="Call now">
+                <span class="cf-action-icon" aria-hidden="true">📞</span>
+                <span data-i18n="callActionLabel">Call Now</span>
+              </button>
+            </div>
           </form>
         </div>
       </section>
     </main>
 
     <!-- FOOTER -->
-    <site-footer></site-footer>
+    <site-footer>Website Designed &amp; Developed by ShehZadi Nizhum</site-footer>
 
     <!-- ══ JAVASCRIPT ══ -->
     <script src="js/portfolio-data.js"></script>

@@ -8,6 +8,338 @@ const menuOverlay = document.getElementById('menuOverlay');
 // Scope nav lookup to the fixed header so the overlay's inner <nav> is ignored.
 const menuNav     = menuBtn?.closest('.site-nav') || document.querySelector('.site-nav');
 
+const LANGUAGE_STORAGE_KEY = 'doctor-utpol-language';
+const LANGUAGE_OPTIONS = ['en', 'bn'];
+const TRANSLATIONS = {
+  en: {
+    langModalTitle: 'আপনার ভাষা নির্বাচন করুন',
+    langModalDesc: 'Select your preferred language to continue browsing the website.',
+    langModalNote: 'Your choice will be remembered for future visits.',
+    langOptionEnglish: 'English',
+    langOptionBangla: 'বাংলা (Bangla)',
+    navHome: 'Home',
+    navServices: 'Services',
+    navJourney: 'Care Journey',
+    navPractice: 'Practice',
+    navFaq: 'FAQ',
+    navBook: 'Book',
+    heroTitlePrefix: 'Hi, I&rsquo;m',
+    heroSub: 'My commitment is to provide safe, compassionate, and high-quality medical care for every child and family through accurate diagnosis, clear guidance, and dedicated treatment.',
+    heroCta: '📞 Contact Now',
+    heroTrustPrefix: 'Trusted by',
+    heroTrustSuffix: 'patients and families',
+    chamberInfoTitle: '🏥 Chamber Information',
+    chamberSectionTitle: '🏥 Chamber',
+    chamberName: 'Al-Araf Medical Center',
+    chamberAddressLabel: '📍 Address',
+    chamberAddressLine1: 'Beside the Santahar Microcar Stand,',
+    chamberAddressLine2: 'Next to Dental Care,',
+    chamberAddressLine3: 'Santahar Pourashava, Bogura, Bangladesh',
+    chamberPlusCodeLabel: 'Plus Code:',
+    chamberVisitingHoursLabel: '🕒 Visiting Hours',
+    chamberVisitingHoursLine1: 'Saturday – Thursday',
+    chamberVisitingHoursLine2: '8:00 AM – 9:00 PM',
+    chamberAppointmentLabel: '📞 Appointment',
+    chamberMapLabel: '🗺️ Google Maps',
+    chamberMapLinkLabel: 'View Location',
+    whyTag: 'Why Patients Choose Me',
+    whyTitleLine1: 'Compassionate Care',
+    whyTitleLine2: 'You Can Trust',
+    whyDesc: 'Quality healthcare is about more than treating illness—it’s about listening, understanding, and providing the right care with compassion. My goal is to ensure every patient feels informed, comfortable, and confident throughout their healthcare journey.',
+    whyItem1: 'Compassionate, patient-centered care',
+    whyItem2: 'Accurate diagnosis and personalized treatment',
+    whyItem3: 'Clear communication and medical guidance',
+    whyItem4: 'Modern, evidence-based healthcare',
+    whyItem5: 'Ongoing support and follow-up care',
+    whyItem6: 'Respectful care for individuals and families',
+    servicesTitle: 'My Services',
+    servicePrimaryCare: 'General Consultation',
+    serviceGeneralConsultation: 'General Consultation',
+    serviceGeneralDesc: 'Personalized medical consultation for common health concerns, wellness guidance, and treatment recommendations.',
+    servicePrevention: 'Preventive Healthcare',
+    servicePreventiveCare: 'Preventive Healthcare',
+    servicePreventiveDesc: 'Stay healthy with regular check-ups, health screenings, and preventive care designed to detect problems early.',
+    serviceLongTermSupport: 'Chronic Disease Management',
+    serviceChronicCare: 'Chronic Disease Management',
+    serviceChronicDesc: 'Comprehensive care, treatment planning, medication review, and regular follow-up for long-term health conditions.',
+    serviceFamilyCare: 'Family Healthcare',
+    serviceFamilySupport: 'Family Healthcare',
+    serviceFamilyDesc: 'Compassionate and personalized healthcare services for individuals and families of all ages.',
+    serviceBookVisit: '📞 Contact Now',
+    step01Label: 'Step 01',
+    step01Title: 'Consultation',
+    step01Desc: 'Every visit begins by listening carefully to your concerns, understanding your medical history, and discussing your healthcare goals.',
+    step02Label: 'Step 02',
+    step02Title: 'Assessment',
+    step02Desc: 'A thorough evaluation is performed to identify your condition, assess potential risks, and determine the most appropriate course of care.',
+    step03Label: 'Step 03',
+    step03Title: 'Personalized Treatment Plan',
+    step03Desc: 'A tailored treatment plan is developed, including medication guidance, lifestyle recommendations, and clear next steps for your recovery.',
+    step04Label: 'Step 04',
+    step04Title: 'Follow-Up Care',
+    step04Desc: 'Your progress is monitored through regular follow-up appointments, allowing adjustments to your treatment whenever necessary.',
+    step05Label: 'Step 05',
+    step05Title: 'Ongoing Support',
+    step05Desc: 'Our commitment continues beyond your appointment, providing ongoing guidance and support to help you maintain better health with confidence.',
+    practiceTag: 'My Practice',
+    practiceTitleLine1: 'Care Areas',
+    practiceTitleLine2: 'We Support',
+    resultsTag: 'Patient Experience',
+    resultsTitleLine1: 'Before &amp; After',
+    resultsTitleLine2: 'Receiving Care',
+    beforeCareLabel: 'Before visiting us',
+    beforeCareValue: 'Unclear guidance and delayed care',
+    afterCareLabel: 'After receiving care',
+    afterCareValue: 'Clear treatment plan and better follow-up',
+    faqTag: 'FAQs',
+    faqTitleLine1: 'Frequently Asked',
+    faqTitleLine2: 'Questions',
+    faqQ1: 'How can I book an appointment?',
+    faqA1: 'You can book an appointment by calling us, sending a WhatsApp message, or using the online appointment form on this website.',
+    faqQ2: 'What are your visiting hours?',
+    faqA2: 'The chamber is open Saturday to Thursday, from 8:00 AM to 9:00 PM. Please contact us before visiting in case of schedule changes.',
+    faqQ3: 'Where is your chamber located?',
+    faqA3: 'Our chamber is located beside the Santahar Microcar Stand, next to Dental Care, Santahar Pourashava, Bogura, Bangladesh.',
+    faqQ4: 'Do I need to bring previous medical reports?',
+    faqA4: 'Yes. If you have previous prescriptions, test reports, or medical records, please bring them to help us provide the best possible care.',
+    faqQ5: 'Do you provide follow-up consultations?',
+    faqA5: 'Yes. Follow-up consultations are available to monitor your recovery, review your progress, and adjust treatment if necessary.',
+    faqQ6: 'Can I contact the doctor for emergencies?',
+    faqA6: 'For medical emergencies, please visit the nearest emergency department immediately. For appointment-related inquiries, you can contact us during chamber hours.',
+    contactTag: 'Let\'s Talk Care',
+    contactTitleLine1: 'Book Your Visit',
+    contactTitleLine2: 'With',
+    contactTitleLine3: 'Trusted Medical Support',
+    contactNameLabel: 'YOUR NAME *',
+    contactEmailLabel: 'EMAIL',
+    contactPhoneLabel: 'PHONE NUMBER *',
+    contactServiceLabel: '',
+    contactPreferenceLabel: '',
+    contactMessageLabel: 'TELL ME ABOUT YOUR HEALTH CONCERN',
+    contactSubmit: 'Send Request',
+    whatsappActionLabel: 'Book via WhatsApp',
+    callActionLabel: 'Call Now',
+    stagesTitle: 'Care Journey',
+    stagesIntro: 'A Simple and Patient-Focused Care Process',
+    counterLabel: 'Patient Support',
+    counterSub: 'For Every Visit',
+    footerPrivacy: 'Privacy Policy',
+    footerTerms: 'Terms &amp; Conditions',
+    footerCopyright: 'All Rights Reserved.',
+    footerName: 'Dr. Akramul Islam Utpol'
+  },
+  bn: {
+    langModalTitle: 'আপনার ভাষা নির্বাচন করুন',
+    langModalDesc: 'ওয়েবসাইট ব্রাউজ করতে আপনার প্রিয় ভাষা নির্বাচন করুন।',
+    langModalNote: 'আপনার পছন্দ ভবিষ্যতের ভিজিটের জন্য মনে রাখা হবে।',
+    langOptionEnglish: 'ইংরেজি',
+    langOptionBangla: 'বাংলা',
+    navHome: 'হোম',
+    navServices: 'সেবা',
+    navJourney: 'সেবার পথ',
+    navPractice: 'চর্চা',
+    navFaq: 'প্রশ্নোত্তর',
+    navBook: 'অ্যাপয়েন্টমেন্ট',
+    heroTitlePrefix: 'হ্যালো, আমি',
+    heroSub: 'প্রতিটি শিশু ও পরিবারের জন্য নিরাপদ, আন্তরিক এবং মানসম্মত চিকিৎসাসেবা নিশ্চিত করাই আমার অঙ্গীকার। সঠিক রোগ নির্ণয়, স্পষ্ট পরামর্শ এবং যত্নশীল চিকিৎসার মাধ্যমে আপনাদের পাশে থাকতে চাই।',
+    heroCta: '📞 এখনই যোগাযোগ করুন',
+    heroTrustPrefix: 'বিশ্বাস করেন',
+    heroTrustSuffix: 'রোগী ও পরিবার',
+    chamberInfoTitle: '🏥 চেম্বার তথ্য',
+    chamberSectionTitle: '🏥 চেম্বার',
+    chamberName: 'আল-আরাফ চিকিৎসালয়',
+    chamberAddressLabel: '📍 ঠিকানা',
+    chamberAddressLine1: 'সান্তাহার মাইক্রোকার স্ট্যান্ডের পাশে,',
+    chamberAddressLine2: 'ডেন্টাল কেয়ারের পাশে,',
+    chamberAddressLine3: 'সান্তাহার পৌরসভা, বগুড়া, বাংলাদেশ',
+    chamberPlusCodeLabel: 'প্লাস কোড:',
+    chamberVisitingHoursLabel: '🕒 রোগী দেখার সময়',
+    chamberVisitingHoursLine1: 'শনিবার – বৃহস্পতিবার',
+    chamberVisitingHoursLine2: 'সকাল ৮:০০টা – রাত ৯:০০টা',
+    chamberAppointmentLabel: '📞 অ্যাপয়েন্টমেন্ট',
+    chamberMapLabel: '🗺️ গুগল ম্যাপ',
+    chamberMapLinkLabel: 'লোকেশন দেখুন',
+    whyTag: 'কেন রোগীরা আমাকে বেছে নেন',
+    whyTitleLine1: 'আন্তরিক সেবা',
+    whyTitleLine2: 'নির্ভরযোগ্য চিকিৎসা',
+    whyDesc: 'ভালো চিকিৎসা শুধু রোগের চিকিৎসার মধ্যেই সীমাবদ্ধ নয়; এটি রোগীর কথা মনোযোগ দিয়ে শোনা, সঠিকভাবে বোঝা এবং আন্তরিকতার সঙ্গে সর্বোত্তম চিকিৎসাসেবা প্রদান করার একটি অঙ্গীকার। প্রতিটি রোগী যেন চিকিৎসার প্রতিটি ধাপে স্বস্তি, আস্থা এবং সঠিক দিকনির্দেশনা পান—সেই লক্ষ্যেই আমি কাজ করি।',
+    whyItem1: 'রোগীকেন্দ্রিক আন্তরিক চিকিৎসাসেবা',
+    whyItem2: 'সঠিক রোগ নির্ণয় ও ব্যক্তিগত চিকিৎসা পরিকল্পনা',
+    whyItem3: 'সহজ ও স্পষ্ট চিকিৎসা পরামর্শ',
+    whyItem4: 'আধুনিক ও প্রমাণভিত্তিক চিকিৎসা',
+    whyItem5: 'নিয়মিত ফলো-আপ ও প্রয়োজনীয় সহায়তা',
+    whyItem6: 'প্রতিটি রোগী ও পরিবারের প্রতি সম্মানজনক আচরণ',
+    servicesTitle: 'আমার সেবাসমূহ',
+    servicePrimaryCare: 'সাধারণ চিকিৎসা ও পরামর্শ',
+    serviceGeneralConsultation: 'সাধারণ চিকিৎসা ও পরামর্শ',
+    serviceGeneralDesc: 'সাধারণ স্বাস্থ্য সমস্যা, শারীরিক অসুস্থতা এবং সুস্থ জীবনযাপনের জন্য ব্যক্তিগত পরামর্শ ও চিকিৎসাসেবা।',
+    servicePrevention: 'স্বাস্থ্য পরীক্ষা ও প্রতিরোধমূলক সেবা',
+    servicePreventiveCare: 'স্বাস্থ্য পরীক্ষা ও প্রতিরোধমূলক সেবা',
+    servicePreventiveDesc: 'নিয়মিত স্বাস্থ্য পরীক্ষা, প্রয়োজনীয় স্ক্রিনিং এবং সঠিক পরামর্শের মাধ্যমে রোগ প্রতিরোধে সহায়তা করি।',
+    serviceLongTermSupport: 'দীর্ঘমেয়াদি রোগের পরিচর্যা',
+    serviceChronicCare: 'দীর্ঘমেয়াদি রোগের পরিচর্যা',
+    serviceChronicDesc: 'ডায়াবেটিস, উচ্চ রক্তচাপ, হাঁপানি ও অন্যান্য দীর্ঘমেয়াদি রোগের নিয়মিত পর্যবেক্ষণ, চিকিৎসা পরিকল্পনা এবং ফলো-আপ সেবা।',
+    serviceFamilyCare: 'পারিবারিক স্বাস্থ্যসেবা',
+    serviceFamilySupport: 'পারিবারিক স্বাস্থ্যসেবা',
+    serviceFamilyDesc: 'পরিবারের প্রতিটি সদস্যের জন্য আন্তরিক, নির্ভরযোগ্য এবং ব্যক্তিগত স্বাস্থ্যসেবা নিশ্চিত করতে প্রতিশ্রুতিবদ্ধ।',
+    serviceBookVisit: '📞 এখনই যোগাযোগ করুন',
+    step01Label: 'ধাপ ০১',
+    step01Title: 'পরামর্শ গ্রহণ',
+    step01Desc: 'প্রথমে আপনার শারীরিক সমস্যা, চিকিৎসার ইতিহাস এবং উদ্বেগ মনোযোগ দিয়ে শুনে বিস্তারিতভাবে মূল্যায়ন করা হয়।',
+    step02Label: 'ধাপ ০২',
+    step02Title: 'স্বাস্থ্য মূল্যায়ন',
+    step02Desc: 'প্রয়োজনীয় পরীক্ষা-নিরীক্ষা ও শারীরিক মূল্যায়নের মাধ্যমে সমস্যার কারণ নির্ণয় করে সর্বোত্তম চিকিৎসার পরিকল্পনা করা হয়।',
+    step03Label: 'ধাপ ০৩',
+    step03Title: 'চিকিৎসা পরিকল্পনা',
+    step03Desc: 'আপনার শারীরিক অবস্থার ভিত্তিতে ওষুধ, জীবনযাপনের পরামর্শ এবং প্রয়োজনীয় চিকিৎসা পরিকল্পনা নির্ধারণ করা হয়।',
+    step04Label: 'ধাপ ০৪',
+    step04Title: 'ফলো-আপ সেবা',
+    step04Desc: 'চিকিৎসার অগ্রগতি পর্যবেক্ষণ, প্রয়োজনে চিকিৎসা পরিকল্পনা পরিবর্তন এবং দ্রুত সুস্থতা নিশ্চিত করতে নিয়মিত ফলো-আপ প্রদান করা হয়।',
+    step05Label: 'ধাপ ০৫',
+    step05Title: 'দীর্ঘমেয়াদি সহায়তা',
+    step05Desc: 'সুস্থতা ধরে রাখতে এবং ভবিষ্যতের স্বাস্থ্যঝুঁকি কমাতে প্রয়োজনীয় পরামর্শ ও ধারাবাহিক চিকিৎসা সহায়তা প্রদান করা হয়।',
+    practiceTag: 'আমার প্র্যাকটিস',
+    practiceTitleLine1: 'যেসব ক্ষেত্রেই',
+    practiceTitleLine2: 'আমি সহায়তা করি',
+    resultsTag: 'রোগী অভিজ্ঞতা',
+    resultsTitleLine1: 'যত্নের আগে',
+    resultsTitleLine2: 'এবং পরে',
+    beforeCareLabel: 'যত্ন নেওয়ার আগে',
+    beforeCareValue: 'অস্পষ্ট নির্দেশনা আর দেরি হওয়া সেবা',
+    afterCareLabel: 'যত্ন নেওয়ার পরে',
+    afterCareValue: 'স্পষ্ট পরিকল্পনা আর ঘনিষ্ঠ ফলো-আপ',
+    faqTag: 'প্রশ্নোত্তর',
+    faqTitleLine1: 'প্রায়শই জিজ্ঞাসিত',
+    faqTitleLine2: 'প্রশ্ন',
+    faqQ1: 'কীভাবে অ্যাপয়েন্টমেন্ট বুক করব?',
+    faqA1: 'ফোন, WhatsApp অথবা এই ওয়েবসাইটের অনলাইন অ্যাপয়েন্টমেন্ট ফর্মের মাধ্যমে সহজেই অ্যাপয়েন্টমেন্ট বুক করতে পারবেন।',
+    faqQ2: 'রোগী দেখার সময় কখন?',
+    faqA2: 'চেম্বার শনিবার থেকে বৃহস্পতিবার, সকাল ৮:০০টা থেকে রাত ৯:০০টা পর্যন্ত খোলা থাকে। বিশেষ কারণে সময় পরিবর্তন হলে আগে থেকে যোগাযোগ করার অনুরোধ করা হচ্ছে।',
+    faqQ3: 'চেম্বার কোথায় অবস্থিত?',
+    faqA3: 'চেম্বারটি সান্তাহার মাইক্রোকার স্ট্যান্ডের পাশে, ডেন্টাল কেয়ারের পাশে, সান্তাহার পৌরসভা, বগুড়ায় অবস্থিত।',
+    faqQ4: 'আগের প্রেসক্রিপশন বা রিপোর্ট নিয়ে আসতে হবে কি?',
+    faqA4: 'জি। আগের প্রেসক্রিপশন, পরীক্ষা-নিরীক্ষার রিপোর্ট বা অন্যান্য চিকিৎসা নথি সঙ্গে আনলে সঠিকভাবে চিকিৎসা দিতে সুবিধা হয়।',
+    faqQ5: 'ফলো-আপ সেবা কি পাওয়া যায়?',
+    faqA5: 'জি। প্রয়োজন অনুযায়ী ফলো-আপের মাধ্যমে চিকিৎসার অগ্রগতি পর্যবেক্ষণ করা হয় এবং প্রয়োজনে চিকিৎসা পরিকল্পনায় পরিবর্তন আনা হয়।',
+    faqQ6: 'জরুরি প্রয়োজনে কী করবেন?',
+    faqA6: 'জরুরি চিকিৎসার প্রয়োজন হলে নিকটস্থ হাসপাতালের জরুরি বিভাগে দ্রুত যোগাযোগ করুন। অ্যাপয়েন্টমেন্ট বা সাধারণ তথ্যের জন্য চেম্বারের নির্ধারিত সময়ে যোগাযোগ করতে পারেন।',
+    contactTag: 'চলুন কথা বলি',
+    contactTitleLine1: 'আপনার ভিজিট নির্ধারণ করুন',
+    contactTitleLine2: 'বিশ্বস্ত',
+    contactTitleLine3: 'চিকিৎসা সেবার সঙ্গে',
+    contactNameLabel: 'আপনার নাম *',
+    contactEmailLabel: 'ইমেইল',
+    contactPhoneLabel: 'ফোন নম্বর *',
+    contactServiceLabel: '',
+    contactPreferenceLabel: '',
+    contactMessageLabel: 'আপনার স্বাস্থ্য সমস্যা বা প্রশ্ন লিখুন',
+    contactSubmit: 'অনুরোধ পাঠান',
+    whatsappActionLabel: 'WhatsApp-এ যোগাযোগ করুন',
+    callActionLabel: 'এখনই কল করুন',
+    stagesTitle: 'সেবার যাত্রা',
+    stagesIntro: 'আপনার চিকিৎসা যাত্রার প্রতিটি ধাপে পাশে আছি',
+    counterLabel: 'রোগী সহায়তা',
+    counterSub: 'প্রতিটি ভিজিটে',
+    footerPrivacy: 'গোপনীয়তা নীতি',
+    footerTerms: 'ব্যবহারের শর্তাবলি',
+    footerCopyright: 'সর্বস্বত্ব সংরক্ষিত।',
+    footerName: 'ডাঃ আকরামুল ইসলাম '
+  }
+};
+
+let currentLanguage = 'en';
+
+function getStoredLanguage() {
+  try {
+    const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    return LANGUAGE_OPTIONS.includes(stored) ? stored : 'en';
+  } catch (error) {
+    return 'en';
+  }
+}
+
+function applyLanguage(lang, persist = true) {
+  const effectiveLang = LANGUAGE_OPTIONS.includes(lang) ? lang : 'en';
+  currentLanguage = effectiveLang;
+  document.documentElement.lang = effectiveLang === 'bn' ? 'bn' : 'en';
+  document.documentElement.setAttribute('data-lang', effectiveLang);
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.dataset.i18n;
+    const value = TRANSLATIONS[effectiveLang][key];
+    if (value) {
+      element.innerHTML = value;
+    }
+  });
+
+  document.querySelectorAll('.lang-switch-btn').forEach(button => {
+    button.classList.toggle('is-active', button.dataset.langSwitch === effectiveLang);
+  });
+
+  document.querySelectorAll('.lang-option').forEach(button => {
+    button.classList.toggle('is-active', button.dataset.lang === effectiveLang);
+  });
+
+  const titleEl = document.querySelector('title');
+  if (titleEl) {
+    titleEl.textContent = effectiveLang === 'bn'
+      ? 'ডাঃ আকরামুল ইসলাম  | সহানুভূতিশীল চিকিৎসা সেবা'
+      : 'Dr. Akramul Islam Utpol | Compassionate Medical Care';
+  }
+
+  if (persist) {
+    try {
+      localStorage.setItem(LANGUAGE_STORAGE_KEY, effectiveLang);
+    } catch (error) {
+      // Ignore storage failures.
+    }
+  }
+}
+
+function showLanguageModal() {
+  const modal = document.getElementById('langModal');
+  if (!modal) return;
+  modal.classList.add('is-open');
+  document.body.classList.add('lang-modal-open');
+}
+
+function hideLanguageModal() {
+  const modal = document.getElementById('langModal');
+  if (!modal) return;
+  modal.classList.remove('is-open');
+  document.body.classList.remove('lang-modal-open');
+}
+
+function initLanguageSystem() {
+  const modal = document.getElementById('langModal');
+  const storedLanguage = getStoredLanguage();
+  const shouldShowModal = !storedLanguage || storedLanguage === 'en' && !localStorage.getItem(LANGUAGE_STORAGE_KEY);
+
+  applyLanguage(storedLanguage, false);
+
+  document.querySelectorAll('.lang-option').forEach(button => {
+    button.addEventListener('click', () => {
+      const nextLang = button.dataset.lang || 'en';
+      applyLanguage(nextLang, true);
+      hideLanguageModal();
+    });
+  });
+
+  document.querySelectorAll('.lang-switch-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const nextLang = button.dataset.langSwitch || 'en';
+      applyLanguage(nextLang, true);
+    });
+  });
+
+  if (modal && shouldShowModal) {
+    showLanguageModal();
+  } else {
+    hideLanguageModal();
+  }
+}
+
+initLanguageSystem();
+
 const SERVICE_THUMB = {
   'talking-head': 'assets/id/Video_call.webp',
   'documentary': 'assets/id/Primary Care.jpg',
@@ -167,7 +499,7 @@ if (counterEl) {
 /* â”€â”€ Trust Counter â”€â”€ */
 let trustCounterStarted = false;
 const trustCounterEl = document.getElementById('trustCounter');
-const TRUST_TARGET = 314;
+const TRUST_TARGET = 25973;
 const TRUST_DURATION = 4000;
 
 function easeOutQuart(x) {
@@ -187,11 +519,11 @@ if (trustCounterEl) {
       const progress = Math.min((timestamp - start) / TRUST_DURATION, 1);
       const current = Math.floor(easeOutQuart(progress) * TRUST_TARGET);
 
-      trustCounterEl.textContent = `${current}+`;
+      trustCounterEl.textContent = `${current}`;
       if (progress < 1) {
         window.requestAnimationFrame(step);
       } else {
-        trustCounterEl.textContent = `${TRUST_TARGET}+`;
+        trustCounterEl.textContent = `${TRUST_TARGET}`;
       }
     };
 
@@ -477,6 +809,19 @@ function buildCountryDropdown() {
 
 buildCountryDropdown();
 
+function setDefaultCountrySelection() {
+  const dropdown = document.getElementById('dd-country');
+  if (!dropdown) return;
+
+  const bangladeshOption = dropdown.querySelector('.cdd-opt[data-value="Bangladesh (+880)"]');
+  if (!bangladeshOption) return;
+
+  selectDd('dd-country', bangladeshOption.dataset.value, bangladeshOption.dataset.icon || '🇧🇩', {
+    country: bangladeshOption.dataset.country || 'Bangladesh',
+    rule: 'bd',
+  });
+}
+
 document.querySelectorAll('[data-dropdown-trigger]').forEach(trigger => {
   const id = trigger.dataset.dropdownTrigger;
   if (!id) return;
@@ -519,7 +864,7 @@ function isValidEmail(value) {
 const PHONE_RULES = {
   bd: {
     label: 'Bangladesh',
-    placeholder: '01712345678',
+    placeholder: '+880 ** *** ****',
     help: 'Enter 11 digits starting with 01. Example: 01712345678',
     normalize(value) {
       let digits = stripPhoneDigits(value);
@@ -660,6 +1005,8 @@ const PHONE_RULES = {
   },
 };
 
+setDefaultCountrySelection();
+
 function stripPhoneDigits(value) {
   let digits = value.replace(/\D/g, '');
   if (digits.startsWith('00')) digits = digits.slice(2);
@@ -668,7 +1015,7 @@ function stripPhoneDigits(value) {
 
 function getSelectedCountryRule() {
   const dropdown = document.getElementById('dd-country');
-  if (!dropdown) return null;
+  if (!dropdown || typeof PHONE_RULES === 'undefined') return null;
 
   // Prefer explicit selectedRule if present
   let ruleKey = dropdown.dataset.selectedRule || '';
@@ -694,11 +1041,26 @@ function getSelectedCountryRule() {
   };
 }
 
+function normalizeBangladeshPhone(value) {
+  const digits = stripPhoneDigits(value);
+  if (/^0\d{10}$/.test(digits)) return `+88${digits.slice(1)}`;
+  if (/^880\d{10}$/.test(digits)) return `+${digits}`;
+  if (/^\+880\d{10}$/.test(value.replace(/\s+/g, ''))) return value.trim();
+  return null;
+}
+
 function normalizeWhatsappByCountry(value, ruleKey) {
   const rule = PHONE_RULES[ruleKey];
   if (!rule) return null;
 
-  return rule.normalize(value.trim());
+  const normalized = rule.normalize(value.trim());
+  if (normalized) return normalized;
+
+  if (ruleKey !== 'bd') {
+    return normalizeBangladeshPhone(value);
+  }
+
+  return null;
 }
 
 function isValidWhatsapp(value, ruleKey) {
@@ -730,7 +1092,7 @@ function updateWhatsappFieldForCountry() {
   if (!field || !help) return;
 
   if (!selectedCountry) {
-    field.placeholder = '+1 234 567 8900';
+    field.placeholder = '+880 ** *** ****';
     help.textContent = '';
     return;
   }
@@ -784,40 +1146,24 @@ function resetDropdown(id, placeholder) {
   dropdown.querySelectorAll('.cdd-opt').forEach(option => option.classList.remove('active'));
 
   clearDropdownError(id, `${id}-err`);
-  if (id === 'dd-country') updateWhatsappFieldForCountry();
+  if (id === 'dd-country') {
+    setDefaultCountrySelection();
+  } else {
+    updateWhatsappFieldForCountry();
+  }
 }
 
-function resetSubmitButton(btn) {
-  btn.innerHTML = '<span class="cta-arr">Â»</span> Send Message';
-  btn.classList.remove('is-loading', 'is-success', 'is-error');
-  btn.disabled = false;
-}
-
-function setSubmitState(btn, state, label) {
-  btn.classList.remove('is-loading', 'is-success', 'is-error');
-  if (state) btn.classList.add(state);
-  btn.textContent = label;
-}
-
-async function handleSubmit(btn) {
-  const name          = document.getElementById('cf-name')?.value.trim()     || '';
-  const email         = document.getElementById('cf-email')?.value.trim()    || '';
-  const whatsapp      = document.getElementById('cf-whatsapp')?.value.trim() || '';
-  const message       = document.getElementById('cf-message')?.value.trim()  || '';
-  const service       = getDropdownValue('dd1');
-  const budget        = getDropdownValue('dd2');
+function validateContactForm() {
+  const name = document.getElementById('cf-name')?.value.trim() || '';
+  const whatsapp = document.getElementById('cf-whatsapp')?.value.trim() || '';
+  const message = document.getElementById('cf-message')?.value.trim() || '';
   const selectedCountry = getSelectedCountryRule();
 
-  // Clear all errors before re-validating
-  clearFieldError('cf-name',     'cf-name-err');
-  clearFieldError('cf-email',    'cf-email-err');
+  clearFieldError('cf-name', 'cf-name-err');
   clearDropdownError('dd-country', 'dd-country-err');
   clearFieldError('cf-whatsapp', 'cf-whatsapp-err');
-  clearDropdownError('dd1',      'dd1-err');
-  clearDropdownError('dd2',      'dd2-err');
-  clearFieldError('cf-message',  'cf-message-err');
+  clearFieldError('cf-message', 'cf-message-err');
 
-  // Validate all fields at once; track elements to focus the first invalid one
   const invalidEls = [];
 
   if (!name) {
@@ -825,133 +1171,100 @@ async function handleSubmit(btn) {
     invalidEls.push(document.getElementById('cf-name'));
   }
 
-  if (!email) {
-    setFieldError('cf-email', 'cf-email-err', 'Email is required.');
-    invalidEls.push(document.getElementById('cf-email'));
-  } else if (!isValidEmail(email)) {
-    setFieldError('cf-email', 'cf-email-err', 'Please enter a valid email address.');
-    invalidEls.push(document.getElementById('cf-email'));
-  }
-
-  if (!selectedCountry) {
-    setDropdownError('dd-country', 'dd-country-err', 'Please select your country first.');
-    invalidEls.push(document.querySelector('[data-dropdown-trigger="dd-country"]'));
-  }
-
   if (!whatsapp) {
     setFieldError('cf-whatsapp', 'cf-whatsapp-err', 'WhatsApp number is required.');
     invalidEls.push(document.getElementById('cf-whatsapp'));
-  } else if (selectedCountry && !isValidWhatsapp(whatsapp, selectedCountry.key)) {
-    setFieldError('cf-whatsapp', 'cf-whatsapp-err', `Enter a valid ${selectedCountry.label} number.`);
-    invalidEls.push(document.getElementById('cf-whatsapp'));
-  }
-
-  if (!document.getElementById('dd1')?.classList.contains('selected')) {
-    setDropdownError('dd1', 'dd1-err', 'Please select a project type.');
-    invalidEls.push(document.querySelector('[data-dropdown-trigger="dd1"]'));
-  }
-
-  if (!document.getElementById('dd2')?.classList.contains('selected')) {
-    setDropdownError('dd2', 'dd2-err', 'Please select a budget range.');
-    invalidEls.push(document.querySelector('[data-dropdown-trigger="dd2"]'));
+  } else {
+    let normalizedPhone = normalizeWhatsappByCountry(whatsapp, selectedCountry.key);
+    if (!normalizedPhone) {
+      // If no explicit country selection was made, accept Bangladeshi local input too.
+      if (selectedCountry.key !== 'bd') {
+        normalizedPhone = normalizeWhatsappByCountry(whatsapp, 'bd');
+      }
+    }
+    if (!normalizedPhone) {
+      setFieldError('cf-whatsapp', 'cf-whatsapp-err', `Enter a valid ${selectedCountry.label} number.`);
+      invalidEls.push(document.getElementById('cf-whatsapp'));
+    }
   }
 
   if (!message) {
-    setFieldError('cf-message', 'cf-message-err', 'Please describe your project.');
+    setFieldError('cf-message', 'cf-message-err', 'Please describe your concern.');
     invalidEls.push(document.getElementById('cf-message'));
   }
 
   if (invalidEls.length) {
     invalidEls[0]?.focus();
-    setSubmitState(btn, 'is-error', 'Fill all fields');
-    setTimeout(() => resetSubmitButton(btn), 2500);
-    return;
+    return null;
   }
 
-  setSubmitState(btn, 'is-loading', 'Sending...');
-  btn.disabled = true;
+  const normalizedPhone = selectedCountry.normalize(whatsapp);
+  return { name, phone: normalizedPhone || whatsapp, message, selectedCountry };
+}
 
-  try {
-    const controller = new AbortController();
-    const fetchTimeout = setTimeout(() => controller.abort(), 20000);
+function buildWhatsAppMessage({ name, phone, message }) {
+  if (currentLanguage === 'bn') {
+    return `আসসালামু আলাইকুম ডাক্তার,\n\nআমি একটি অ্যাপয়েন্টমেন্ট নিতে চাই।\n\nনাম:\n${name}\n\nমোবাইল নম্বর:\n${phone}\n\nসমস্যার বিবরণ:\n${message}\n\nধন্যবাদ।`;
+  }
 
-    const response = await fetch('send-mail.php', {
-      signal: controller.signal,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        whatsapp,
-        whatsappCountry: selectedCountry.label,
-        whatsappRule: selectedCountry.key,
-        message,
-        service,
-        budget,
-      }),
-    });
+  return `Hello Doctor,\n\nI would like to book an appointment.\n\nName: ${name}\nPhone: ${phone}\n\nHealth Concern:\n${message}\n\nThank you.`;
+}
 
-    clearTimeout(fetchTimeout);
-    const json = await response.json();
-    if (!response.ok || !json.ok) {
-      if (json.error === 'Invalid email address') {
-        setFieldError('cf-email', 'cf-email-err', 'Please enter a valid email address.');
-        document.getElementById('cf-email')?.focus();
-      }
+function buildWhatsAppUrl(data) {
+  const encodedText = encodeURIComponent(buildWhatsAppMessage(data));
+  return `https://wa.me/8801311928892?text=${encodedText}`;
+}
 
-      if (json.error === 'Invalid WhatsApp number') {
-        setFieldError('cf-whatsapp', 'cf-whatsapp-err', 'Please enter a valid WhatsApp number for the selected country.');
-        document.getElementById('cf-whatsapp')?.focus();
-      }
+function openWhatsAppAction() {
+  const data = validateContactForm();
+  if (!data) return;
 
-      throw new Error(json.error || 'failed');
-    }
-
-    setSubmitState(btn, 'is-success', 'Message Sent!');
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead');
-    }
-
-    ['cf-name', 'cf-email', 'cf-whatsapp', 'cf-message'].forEach(id => {
-      const field = document.getElementById(id);
-      if (field) field.value = '';
-    });
-
-    resetDropdown('dd-country', 'Country');
-    resetDropdown('dd1', 'Select a service...');
-    resetDropdown('dd2', 'Select budget...');
-
-    setTimeout(() => resetSubmitButton(btn), 3500);
-  } catch (error) {
-    setSubmitState(btn, 'is-error', 'Error, try again');
-    btn.disabled = false;
-    console.error('Form error:', error.message);
-
-    setTimeout(() => resetSubmitButton(btn), 3000);
+  const url = buildWhatsAppUrl(data);
+  const newTab = window.open(url, '_blank', 'noopener,noreferrer');
+  if (!newTab) {
+    window.location.href = url;
   }
 }
 
-const contactSubmit = document.getElementById('contactSubmit');
-if (contactSubmit) {
-  contactSubmit.addEventListener('click', () => handleSubmit(contactSubmit));
+function openCallAction() {
+  // Call Now should work independently from the form.
+  window.location.href = 'tel:+8801311928892';
 }
+
+function attachContactActions() {
+  const whatsappAction = document.getElementById('whatsappAction');
+  if (whatsappAction) {
+    whatsappAction.addEventListener('click', openWhatsAppAction);
+  }
+
+  const callAction = document.getElementById('callAction');
+  if (callAction) {
+    callAction.addEventListener('click', openCallAction);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', attachContactActions);
+} else {
+  attachContactActions();
+}
+
+// Prevent navigation to local policy pages when user requested no redirection
+document.addEventListener('click', event => {
+  const anchor = event.target.closest && event.target.closest('a');
+  if (!anchor) return;
+  const href = anchor.getAttribute('href') || '';
+  if (href.endsWith('privacy-policy.html') || href.endsWith('terms-and-conditions.html')) {
+    event.preventDefault();
+    // Intentionally do nothing (no redirect). Developers can hook this to open a modal if desired.
+    console.log('Navigation prevented to', href);
+  }
+});
 
 const nameField = document.getElementById('cf-name');
 if (nameField) {
   nameField.addEventListener('input', () => {
     if (nameField.value.trim()) clearFieldError('cf-name', 'cf-name-err');
-  });
-}
-
-const emailField = document.getElementById('cf-email');
-if (emailField) {
-  emailField.addEventListener('input', () => {
-    if (!emailField.value.trim() || isValidEmail(emailField.value.trim())) {
-      clearFieldError('cf-email', 'cf-email-err');
-    }
   });
 }
 
