@@ -798,6 +798,58 @@ section#home.hero{ padding:0; }
   transition:border-color .25s, box-shadow .25s, transform .25s; cursor:pointer;
 }
 .scard:hover{ border-color:rgba(255,237,84,.3); box-shadow:0 12px 48px rgba(255,237,84,.08), 0 8px 40px rgba(0,0,0,.4); transform:translateY(-4px); }
+
+/* â”€â”€ FLOATING ACTION BUTTONS (bottom-right) â”€â”€ */
+.fab-group{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+  z-index:9999;
+  pointer-events:auto;
+}
+.fab-btn{
+  width:52px;
+  height:52px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(180deg,#FFED54,#E6C800);
+  color:#000;
+  text-decoration:none;
+  border:none;
+  box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 4px rgba(255,237,84,.06);
+  cursor:pointer;
+  transform:translateZ(0);
+  transition:transform .18s ease, box-shadow .18s ease, opacity .2s;
+}
+.fab-btn:active{ transform:scale(.96); }
+.fab-btn .fab-icon{ font-size:20px; line-height:1; }
+
+/* Call button gets a gentle zoom in/out pulse to draw attention */
+@keyframes fab-zoomPulse{ 0%{ transform:scale(1) } 50%{ transform:scale(1.09) } 100%{ transform:scale(1) } }
+.fab-call{
+  background:linear-gradient(180deg,#FFED54,#FFD84A);
+  box-shadow:0 12px 34px rgba(255,205,30,.22),0 0 0 6px rgba(255,237,84,.06);
+  animation: fab-zoomPulse 1.8s ease-in-out infinite;
+}
+
+.fab-top{
+  background:transparent;
+  border:2px solid rgba(255,237,84,.9);
+  color:var(--yellow);
+  box-shadow:0 8px 22px rgba(0,0,0,.5), inset 0 0 18px rgba(255,237,84,.04);
+}
+
+/* Keep FABs unobtrusive on very small screens */
+@media(max-width:420px){
+  .fab-group{ right:12px; bottom:12px; gap:8px; }
+  .fab-btn{ width:46px; height:46px; }
+}
 .scard:hover::before{ transform:scaleX(1); }
 .scard-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
 .scard-tag{ font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); padding:4px 10px; border:1px solid var(--border); border-radius:20px; }

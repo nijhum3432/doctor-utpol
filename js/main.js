@@ -449,6 +449,8 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// Note: scroll-to-top arrow removed — no related JS required.
+
 /* â”€â”€ Stars â”€â”€ */
 (function () {
   const starsRoot = document.getElementById('stars');
