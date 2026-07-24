@@ -846,10 +846,12 @@ section#home.hero{ padding:0; }
 }
 .work-marquee{
   display:flex; gap:14px; align-items:flex-start;
-  animation:marquee 55s linear infinite;
-  width:auto; min-width:100%; padding:8px 0;
+  flex-wrap:nowrap;
+  animation:marquee 38s linear infinite;
+  width:max-content; min-width:100%; padding:8px 0;
   overflow-x:hidden;
   justify-content:flex-start;
+  will-change:transform;
 }
 .work-marquee:hover{ animation-play-state:paused; }
 @keyframes marquee{ from{ transform:translateX(0) } to{ transform:translateX(-50%) } }
@@ -884,10 +886,10 @@ section#home.hero{ padding:0; }
 }
 .work-thumb-overlay{ position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.7),transparent 55%); }
 .work-thumb-icon{ position:absolute; top:50%; left:50%; transform:translate(-50%,-55%); font-size:28px; opacity:.2; }
-/* Vertical (9:16) thumb in marquee */
+/* Vertical thumb should match the regular marquee card size */
 .work-thumb-v{
-  width:110px !important;
-  aspect-ratio:9/16 !important;
+  width:min(48vw, 220px) !important;
+  aspect-ratio:16/9 !important;
 }
 
 /* â”€â”€ CTR BEFORE/AFTER â”€â”€ */
@@ -1017,6 +1019,26 @@ section#home.hero{ padding:0; }
 /* â”€â”€ CONTACT FORM â”€â”€ */
 .cf-group{ margin-bottom:0; padding:18px 0; border-bottom:1px solid #1a1a1a; }
 .cf-label{ display:block; font-size:11px; font-weight:700; letter-spacing:3px; color:var(--muted); margin-bottom:8px; font-family:'Barlow Condensed',sans-serif; }
+html[data-lang='bn'] .cf-label,
+html[data-lang='bn'] .cf-action-btn,
+html[data-lang='bn'] .cf-submit,
+html[data-lang='bn'] .btn-cta,
+html[data-lang='bn'] .site-links a,
+html[data-lang='bn'] .lang-switch-btn,
+html[data-lang='bn'] .tag-pill,
+html[data-lang='bn'] .section-title,
+html[data-lang='bn'] .stcard-name,
+html[data-lang='bn'] .stcard-num,
+html[data-lang='bn'] .counter-label,
+html[data-lang='bn'] .counter-sub,
+html[data-lang='bn'] .hero-cta,
+html[data-lang='bn'] .cf-input::placeholder,
+html[data-lang='bn'] .cf-textarea::placeholder {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+  font-family: 'Inter', sans-serif !important;
+}
 .cf-input{
   width:100%;
   color:var(--text); font-family:'Inter',sans-serif; font-size:15px; font-weight:500;
@@ -1840,8 +1862,9 @@ body, p, h1, h2, h3, h4, a, span, input, button { word-wrap:break-word; word-bre
     max-width:39px;
     aspect-ratio:10 / 9;
   }
-  .work-marquee{ justify-content:flex-start; overflow-x:hidden; }
+  .work-marquee{ justify-content:flex-start; overflow-x:hidden; flex-wrap:nowrap; animation:marquee 38s linear infinite; }
   .work-thumb{ width:min(48vw, 200px); }
+  .work-thumb-v{ width:min(48vw, 200px); aspect-ratio:16/9 !important; }
   .faq-a{ padding:0 18px 0 54px; }
   .sh-wrap{ min-height:80svh; padding:0 22px; }
   .sh-tl, .sh-tr, .sh-bl, .sh-br{ width:222px; }

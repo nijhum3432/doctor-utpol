@@ -24,14 +24,14 @@
 const PORTFOLIO = [
 
   /* â”€â”€ TALKING HEAD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  { service: 'talking-head', platform: 'youtube', id: '_67MWD7XW9Q', thumb: 'assets/id/Video_call.webp', label: 'Doctor Video Call' },
-  { service: 'talking-head', platform: 'youtube', id: '5PKYfRofUdg', thumb: 'assets/id/video-doctor.webp', label: 'Doctor Consultation' },
+  { service: 'talking-head', platform: 'youtube', id: '_67MWD7XW9Q', thumb: 'assets/id/Become a Corporate Partner.webp', label: 'Doctor Video Call' },
+  { service: 'talking-head', platform: 'youtube', id: '5PKYfRofUdg', thumb: 'assets/id/Why_DocTime.webp', label: 'Doctor Consultation' },
   { service: 'talking-head', platform: 'youtube', id: '3yAiVjcImQ4', thumb: 'assets/id/Primary Care.jpg', label: 'Primary Care' },
   { service: 'talking-head', platform: 'youtube', id: 'MLXZ_aa2ZKw', thumb: 'assets/id/Why_DocTime.webp', label: 'Why Doctor Time' },
   { service: 'talking-head', platform: 'youtube', id: 't0Mesp118l4', thumb: 'assets/id/DiagnosticTests.webp', label: 'Diagnostic Tests' },
   { service: 'talking-head', platform: 'youtube', id: 'fo8Sw7CMl-M', thumb: 'assets/id/Home Diagnostic Service.webp', label: 'Home Diagnostic Service' },
   { service: 'talking-head', platform: 'youtube', id: 'Qgi5hb7yxjU', thumb: 'assets/id/ItServices.webp', label: 'IT Services' },
-  { service: 'talking-head', platform: 'youtube', id: 'htZRCE2GgIs', thumb: 'assets/id/CorporateHealthcare.webp', label: 'Corporate Healthcare' },
+  { service: 'talking-head', platform: 'youtube', id: 'htZRCE2GgIs', thumb: 'assets/id/Become a Premium Member.webp', label: 'Corporate Healthcare' },
   { service: 'talking-head', platform: 'youtube', id: 'nAFw5i39m9I', thumb: 'assets/id/Become a Corporate Partner.webp', label: 'Become a Corporate Partner' },
   { service: 'talking-head', platform: 'youtube', id: 'Q_-Ar9tPjdY', thumb: 'assets/id/Become a Premium Member.webp', label: 'Become a Premium Member' },
   /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -46,7 +46,7 @@ const PORTFOLIO = [
   /* â”€â”€ SHORT FORM (vertical 9:16) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   { service: 'short-form', platform: 'youtube', id: 'iYaGblqcbK8', vertical: true, thumb: 'assets/id/phfgnei6hF8oDVyeSzF2vzghb2tbRqZM49uxYsaG.png', label: 'Remote Health' },
   { service: 'short-form', platform: 'youtube', id: 'EM9a6mnGupI', vertical: true, thumb: 'assets/id/post_2.png', label: 'Virtual Clinic' },
-  { service: 'short-form', platform: 'youtube', id: 'p5YfHE0saFg', vertical: true, thumb: 'assets/id/post_3.jpg', label: 'Wellness Journey' },
+  { service: 'short-form', platform: 'youtube', id: 'p5YfHE0saFg', vertical: true, thumb: 'assets/id/post_2.png', label: 'Wellness Journey' },
   /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
   /* â”€â”€ MAP ANIMATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */

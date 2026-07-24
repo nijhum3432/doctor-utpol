@@ -143,7 +143,7 @@ const TRANSLATIONS = {
     heroTitlePrefix: 'হ্যালো, আমি',
     heroSub: 'প্রতিটি শিশু ও পরিবারের জন্য নিরাপদ, আন্তরিক এবং মানসম্মত চিকিৎসাসেবা নিশ্চিত করাই আমার অঙ্গীকার। সঠিক রোগ নির্ণয়, স্পষ্ট পরামর্শ এবং যত্নশীল চিকিৎসার মাধ্যমে আপনাদের পাশে থাকতে চাই।',
     heroCta: '📞 এখনই যোগাযোগ করুন',
-    heroTrustPrefix: 'বিশ্বাস করেন',
+    heroTrustPrefix: 'বিশ্বাস করেছেন',
     heroTrustSuffix: 'রোগী ও পরিবার',
     chamberInfoTitle: '🏥 চেম্বার তথ্য',
     chamberSectionTitle: '🏥 চেম্বার',
@@ -341,31 +341,29 @@ function initLanguageSystem() {
 initLanguageSystem();
 
 const SERVICE_THUMB = {
-  'talking-head': 'assets/id/Video_call.webp',
+  'talking-head': 'assets/id/Why_DocTime.webp',
   'documentary': 'assets/id/Primary Care.jpg',
   'short-form': 'assets/id/Why_DocTime.webp',
-  'map-animation': 'assets/id/video-doctor.webp',
+  'map-animation': 'assets/id/Home Diagnostic Service.webp',
 };
 
 const DEFAULT_THUMB_ASSETS = [
-  'assets/id/Video_call.webp',
-  'assets/id/video-doctor.webp',
   'assets/id/Primary Care.jpg',
   'assets/id/Why_DocTime.webp',
   'assets/id/DiagnosticTests.webp',
   'assets/id/Home Diagnostic Service.webp',
   'assets/id/ItServices.webp',
-  'assets/id/CorporateHealthcare.webp',
   'assets/id/Become a Corporate Partner.webp',
   'assets/id/Become a Premium Member.webp',
   'assets/id/post_2.png',
-  'assets/id/post_3.jpg',
   'assets/id/b1noCxMoWLRrjud9WmgjmViaqERGlUaHFhI8qXUG.png',
   'assets/id/bAoQAPWmuc8P1JkM2EfdciYgMIiED3NHAnI6h6Ow.jpg',
   'assets/id/mXMszFwJEvqs4jSOgRmVUTIRVGU2Ehota0pP4ao4.jpg',
   'assets/id/pCDncOqwJWLD1qdcqfxIL6pldGHeHRQW3pMr7gP4.jpg',
   'assets/id/phfgnei6hF8oDVyeSzF2vzghb2tbRqZM49uxYsaG.png',
+  'assets/id/post_2.png',
 ];
+const AVAILABLE_THUMB_ASSETS = new Set(DEFAULT_THUMB_ASSETS);
 
 function defaultThumbForId(id) {
   if (!id) return DEFAULT_THUMB_ASSETS[0];
@@ -374,6 +372,13 @@ function defaultThumbForId(id) {
     hash += id.charCodeAt(i);
   }
   return DEFAULT_THUMB_ASSETS[hash % DEFAULT_THUMB_ASSETS.length];
+}
+
+function safeThumbSrc(src, id) {
+  if (!src || !AVAILABLE_THUMB_ASSETS.has(src)) {
+    return defaultThumbForId(id);
+  }
+  return src;
 }
 
 function syncMenuOverlayOffset() {
@@ -1778,17 +1783,18 @@ function makePfCard(item) {
     return result;
   }
 
-  const longForm = PORTFOLIO.filter(item => item.service !== 'short-form');
-  const interleaved = interleaveByCategory(longForm);
+  const allPortfolios = PORTFOLIO;
+  const interleaved = interleaveByCategory(allPortfolios);
   // Doubled so the CSS marquee animation loops seamlessly (scrolls exactly 50% then resets)
   const doubled = [...interleaved, ...interleaved];
 
   track.innerHTML = doubled.map(item => {
     const meta = SERVICE_META[item.service];
     const isYoutube = item.platform === 'youtube';
-    const thumbSrc = item.thumb || SERVICE_THUMB[item.service];
+    const fallbackSrc = DEFAULT_THUMB_ASSETS[0];
+    const thumbSrc = safeThumbSrc(item.thumb || SERVICE_THUMB[item.service], item.id);
     const thumb = isYoutube
-      ? `<img class="work-thumb-media" src="${thumbSrc || defaultThumbForId(item.id)}" alt="${getPortfolioAltText(item)}" loading="lazy" decoding="async" width="320" height="180">`
+      ? `<img class="work-thumb-media" src="${thumbSrc}" alt="${getPortfolioAltText(item)}" loading="eager" decoding="async" width="320" height="180" onerror="this.onerror=null;this.src='${fallbackSrc}'">`
       : `<span class="work-thumb-icon" aria-hidden="true">${meta.icon}</span>`;
     const verticalClass = item.vertical ? ' work-thumb-v' : '';
     const serviceClass = ` work-thumb--${item.service}`;
