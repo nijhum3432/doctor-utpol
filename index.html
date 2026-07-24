@@ -289,7 +289,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 16px;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
       }
       .site-logo {
         display: flex;
@@ -310,13 +310,24 @@
         margin-left: 6px;
         font-size: clamp(15px, 3.2vw, 20px);
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: min(220px, 35vw);
       }
       .site-links {
+        position: relative;
         display: flex;
         align-items: center;
         gap: 14px;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         justify-content: flex-end;
+        min-width: 0;
+      }
+      .site-links .lang-switcher {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
       }
       .site-links ul {
         display: flex;
@@ -353,8 +364,35 @@
         min-width: 0;
       }
       @media (max-width: 800px) {
+        .site-nav-static {
+          position: relative;
+          padding-left: 18px;
+          padding-right: 0;
+        }
+        .site-nav-inner {
+          position: static;
+          width: 100%;
+          max-width: none;
+          padding: 0;
+        }
         .mobile-menu-btn {
           display: inline-flex;
+          order: 2;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          margin-left: 0;
+          z-index: 5;
+        }
+        .site-links {
+          position: static;
+          justify-content: flex-start;
+          width: 100%;
+          padding-right: 110px;
+        }
+        .site-links .lang-switcher {
+          order: 1;
         }
         .site-links ul {
           display: none;
@@ -383,6 +421,9 @@
         }
         .site-links.open ul a:hover {
           background: rgba(255, 237, 84, 0.12);
+        }
+        .site-links.open .lang-switcher {
+          order: 0;
         }
       }
       main {
@@ -452,14 +493,15 @@
       }
       @media (max-width: 768px) {
         .site-nav-static {
-          padding: 10px 14px;
+          padding: 10px 0 10px 18px;
+          position: relative;
         }
         .site-nav-inner {
           gap: 10px;
         }
         .site-links {
           width: 100%;
-          justify-content: flex-end;
+          justify-content: flex-start;
         }
         .site-logo-text {
           font-size: clamp(16px, 4.5vw, 18px);
@@ -510,7 +552,36 @@
           gap: 8px;
         }
       }
+      @media (max-width: 640px) {
+        .site-logo-text {
+          white-space: normal;
+          overflow: visible;
+          max-width: 160px;
+          font-size: 14px;
+          line-height: 1.1;
+        }
+        .site-links {
+          justify-content: space-between;
+          gap: 10px;
+        }
+        .site-links ul {
+          gap: 12px;
+        }
+        .mobile-menu-btn {
+          padding: 8px 10px;
+        }
+      }
       @media (max-width: 480px) {
+        .site-logo-text {
+          max-width: 140px;
+          font-size: 13px;
+        }
+        .site-links ul {
+          gap: 10px;
+        }
+        .mobile-menu-btn {
+          padding: 7px 9px;
+        }
         .hero-photo-wrap {
           width: min(72vw, 260px);
         }
