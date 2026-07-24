@@ -1837,23 +1837,4 @@ const SERVICE_PARAM_MAP = {
   selectDd('dd1', entry.value, entry.icon);
 })();
 
-/* â”€â”€ Scroll to top â”€â”€ */
-(function () {
-  const btn = document.createElement('button');
-  btn.className = 'scroll-top';
-  btn.setAttribute('aria-label', 'Scroll to top');
-  btn.innerHTML = '&#8679;';
-  document.body.appendChild(btn);
-
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      btn.classList.toggle('visible', window.scrollY > 400);
-      ticking = false;
-    });
-  }, { passive: true });
-
-  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-})();
+/* Scroll-to-top removed per request */
